@@ -367,7 +367,7 @@ impl MBR {
         S: Seek,
     {
         let disk_size = u32::try_from(seeker.seek(SeekFrom::End(0))? / u64::from(sector_size))
-            .unwrap_or_else(|_| u32::max_value());
+            .unwrap_or(u32::max_value());
         let header = MBRHeader::new(disk_signature);
 
         Ok(MBR {
@@ -398,7 +398,7 @@ impl MBR {
         R: Read + Seek,
     {
         let disk_size = u32::try_from(reader.seek(SeekFrom::End(0))? / u64::from(sector_size))
-            .unwrap_or_else(|_| u32::max_value());
+            .unwrap_or(u32::max_value());
         let header = MBRHeader::read_from(&mut reader)?;
 
         let mut logical_partitions = Vec::new();
