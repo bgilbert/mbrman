@@ -1749,6 +1749,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::bool_assert_comparison)]
     fn read_disk1() {
         let mut mbr = MBR::read_from(&mut File::open(DISK1).unwrap(), 512).unwrap();
         assert!(mbr.header.partition_1.is_used());
@@ -1843,6 +1844,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::bool_assert_comparison)]
     fn new_mbr_then_write_then_read_twice() {
         let ss = 512_u32;
         let data = vec![0; 12 * ss as usize];
